@@ -129,12 +129,29 @@ void ChangeUsername(std::string& oldUsername)
 
 void ChangePassword(const std::string& username)
 {
-    /*std::ofstream file("data/" + username + ".txt");
-    std::string currentPassword, currentPasswordInFile;
-    std::ifstream read(filename);
-    getline(read, currentPasswordInFile);
-    std::cout << "Enter current password: "; std::cin >> currentPassword;
-    *///
+    std::ifstream read("data/" + username + ".txt");
+
+    std::string currentPasswordInFile;
+    std::getline(read, currentPasswordInFile);
+    read.close();
+
+    // Запрос текущего пароля у пользователя
+    std::string currentPassword;
+    std::cout << "Enter current password: ";
+    std::cin >> currentPassword;
+
+    // Проверка пароля
+    if (currentPassword == currentPasswordInFile) {
+        std::cout << "Password is correct." << std::endl;
+    }
+    else {
+        std::cout << "Incorrect password." << std::endl;
+        std::cout << "Press Enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорируем оставшиеся символы до новой строки
+        std::cin.get();    // Ждём нажатия клавиши Enter
+        return;
+    }
+
     std::string newPassword;
     std::cout << "Enter new password: ";
     std::cin >> newPassword;
