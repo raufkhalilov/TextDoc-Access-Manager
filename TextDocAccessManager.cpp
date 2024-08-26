@@ -151,10 +151,22 @@ void ChangePassword(const std::string& username)
         std::cin.get();    // Ждём нажатия клавиши Enter
         return;
     }
-
-    std::string newPassword;
-    std::cout << "Enter new password: ";
-    std::cin >> newPassword;
+    
+    std::string newPassword, newPassword2;
+    while (true) {
+        
+        std::cout << "Enter new password: ";
+        std::cin >> newPassword;
+        std::cout << "Re-enter the password: ";
+        std::cin >> newPassword2;
+        if (newPassword != newPassword2) {
+            std::cout << "Passwords don't match. Try later.\n";
+            std::cout << "Press Enter to continue...";
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорируем оставшиеся символы до новой строки
+            std::cin.get();    // Ждём нажатия клавиши Enter
+            return;
+        }
+    }
 
     std::ofstream file("data/" + username + ".txt");
     if (file) {
