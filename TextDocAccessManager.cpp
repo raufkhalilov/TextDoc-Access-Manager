@@ -141,10 +141,7 @@ void ChangePassword(const std::string& username)
     std::cin >> currentPassword;
 
     // Проверка пароля
-    if (currentPassword == currentPasswordInFile) {
-        std::cout << "Password is correct." << std::endl;
-    }
-    else {
+    if (currentPassword != currentPasswordInFile) {
         std::cout << "Incorrect password." << std::endl;
         std::cout << "Press Enter to continue...";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорируем оставшиеся символы до новой строки
@@ -153,29 +150,29 @@ void ChangePassword(const std::string& username)
     }
     
     std::string newPassword, newPassword2;
-    while (true) {
-        
-        std::cout << "Enter new password: ";
-        std::cin >> newPassword;
-        std::cout << "Re-enter the password: ";
-        std::cin >> newPassword2;
-        if (newPassword != newPassword2) {
-            std::cout << "Passwords don't match. Try later.\n";
-            std::cout << "Press Enter to continue...";
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорируем оставшиеся символы до новой строки
-            std::cin.get();    // Ждём нажатия клавиши Enter
-            return;
-        }
-    }
-
+    std::cout << "Enter new password: ";
+    std::cin >> newPassword;
+    std::cout << "Re-enter the password: ";
+    std::cin >> newPassword2;
+    if (newPassword != newPassword2) {
+        std::cout << "Passwords don't match. Try later.\n";
+        std::cout << "Press Enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорируем оставшиеся символы до новой строки
+        std::cin.get();    // Ждём нажатия клавиши Enter
+        return;
+    }  
+         
     std::ofstream file("data/" + username + ".txt");
     if (file) {
         file << newPassword;
         file.close();
         std::cout << "Password changed successfully." << std::endl;
+        std::cout << "Press Enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Игнорируем оставшиеся символы до новой строки
+        std::cin.get();
     }
     else {
-        std::cout << "Error opening file." << std::endl;
+        std::cout << "Error with your account." << std::endl;
     }
 }
 
