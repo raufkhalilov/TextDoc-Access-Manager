@@ -68,6 +68,7 @@ bool LoginUser(std::string& username) {
         std::cout << response << std::endl;
         return false;
     }
+    
 }
 
 void DisplayContents(const std::string& username) {
@@ -75,6 +76,7 @@ void DisplayContents(const std::string& username) {
     std::string response = SendRequest(request);
 
     std::cout << response << std::endl;
+    std::cin.get();
 }
 
 void ChangeUsername(std::string& oldUsername) {
@@ -138,19 +140,29 @@ int main() {
                         switch (postLoginChoice) {
                             case '1':
                                 DisplayContents(username);
+                                std::cout << "Press Enter to continue..." << std::endl;
+                                std::cin.get();
                                 break;
                             case '2':
                                 ChangeUsername(username);
+                                std::cout << "Press Enter to continue..." << std::endl;
+                                std::cin.get();
                                 break;
                             case '3':
                                 ChangePassword(username);
+                                std::cout << "Press Enter to continue..." << std::endl;
+                                std::cin.get();
                                 break;
                             case '4':
                                 std::cout << "Logging out..." << std::endl;
                                 ClearScreen();
+                                // std::cout << "Press Enter to continue..." << std::endl;
+                                // std::cin.get();
                                 break;
                             default:
                                 std::cout << "Invalid choice. Please select again." << std::endl;
+                                std::cout << "Press Enter to continue..." << std::endl;
+                                std::cin.get();
                                 break;
                         }
 
