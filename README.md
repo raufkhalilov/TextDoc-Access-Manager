@@ -5,7 +5,7 @@ TextDoc Access Manager is a simple C++ client-server application that I develope
 ## Features
 
 - **Client-Server Architecture**: Separate client and server applications communicate to manage user data and authentication.
-- **Cross-Platform Support**: Compatible with Windows, Linux, and macOS.
+- **Cross-Platform Support**: Compatible with Linux, Windows and macOS.
 - **Multithreaded Server**: Handles multiple client connections concurrently.
 
 ## Requirements
@@ -14,7 +14,7 @@ TextDoc Access Manager is a simple C++ client-server application that I develope
 - **CMake 3.10** or higher
 - **Asio library**
 
-## Installation
+## Installation(for Linux)
 
 ### 1. Install Dependencies
 
