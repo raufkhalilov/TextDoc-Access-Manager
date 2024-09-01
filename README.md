@@ -32,6 +32,7 @@ cd vcpkg
 
 ```bash
 ./vcpkg install asio
+sudo apt-get install libasio-dev libboost-all-dev
 ```
 
 ### 2. Clone the Repository
