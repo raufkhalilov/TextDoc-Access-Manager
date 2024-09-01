@@ -90,10 +90,6 @@ cd TextDoc-Access-Manager
 - **CMakeLists.txt**: Build configuration file for CMake.
 - **README.md**: Documentation for the project.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
 ## Contributing
 
 Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
