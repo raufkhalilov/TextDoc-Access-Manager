@@ -97,7 +97,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Contributing
 
 Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
-
-## Contact
-
-For issues, questions, or contributions, please open an issue on [GitHub](https://github.com/yourusername/TextDoc-Access-Manager) or contact me through the repository.
