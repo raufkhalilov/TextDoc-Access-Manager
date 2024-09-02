@@ -68,7 +68,6 @@ bool LoginUser(std::string& username) {
         std::cout << response << std::endl;
         return false;
     }
-    
 }
 
 void DisplayContents(const std::string& username) {
@@ -116,7 +115,29 @@ void ChangePassword(const std::string& username) {
     std::cout << response << std::endl;
 }
 
+void EditFileLine(const std::string& username) {
+    std::string filename, newText;
+    int lineNumber;
+
+    //std::cout << "Enter filename: ";
+    filename = username + ".txt";
+
+    std::cout << "Enter line number to edit: ";
+    std::cin >> lineNumber;
+    lineNumber++;
+
+    std::cout << "Enter new text for line " << lineNumber-1 << ": ";
+    std::cin.ignore(); // Игнорируем оставшийся '\n' после предыдущего ввода
+    std::getline(std::cin, newText);
+
+    std::string request = "edit " + filename + " " + std::to_string(lineNumber) + " " + newText;
+    std::string response = SendRequest(request);
+
+    std::cout << response << std::endl;
+}
+
 int main() {
+    ClearScreen();
     char choice;
 
     while (true) {
@@ -133,7 +154,7 @@ int main() {
                     while (true) {
                         ClearScreen();
                         std::cout << "Successfully logged in!" << std::endl;
-                        std::cout << "1: Display contents\n2: Change username\n3: Change password\n4: Go to the main menu\nYour choice: ";
+                        std::cout << "1: Display contents\n2: Change username\n3: Change password\n4: Edit file line\n5: Go to the main menu\nYour choice: ";
                         char postLoginChoice;
                         std::cin >> postLoginChoice;
 
@@ -154,10 +175,13 @@ int main() {
                                 std::cin.get();
                                 break;
                             case '4':
+                                EditFileLine(username);
+                                std::cout << "Press Enter to continue..." << std::endl;
+                                std::cin.get();
+                                break;
+                            case '5':
                                 std::cout << "Logging out..." << std::endl;
                                 ClearScreen();
-                                // std::cout << "Press Enter to continue..." << std::endl;
-                                // std::cin.get();
                                 break;
                             default:
                                 std::cout << "Invalid choice. Please select again." << std::endl;
@@ -166,7 +190,7 @@ int main() {
                                 break;
                         }
 
-                        if (postLoginChoice == '4') {
+                        if (postLoginChoice == '5') {
                             break;
                         }
                     }

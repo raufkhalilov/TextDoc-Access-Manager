@@ -41,6 +41,7 @@ std::string HandleDisplay(const std::string& username) {
     std::ifstream file(filename);
     if (file) {
         std::string line, result;
+        getline(file, line);
         while (getline(file, line)) {
             result += line + "\n";
         }
@@ -95,6 +96,40 @@ std::string HandleChangePassword(const std::string& username, const std::string&
     }
 }
 
+std::string HandleEdit(const std::string& filename, int lineNumber, const std::string& newText) {
+    std::ifstream fileIn("data/" + filename);
+    if (!fileIn) {
+        return "File not found.";
+    }
+
+    std::vector<std::string> lines;
+    std::string line;
+    while (std::getline(fileIn, line)) {
+        lines.push_back(line);
+    }
+    fileIn.close();
+
+    if (lineNumber < 1 || lineNumber > lines.size()) {
+        while (lines.size() < lineNumber) {
+            lines.push_back("");
+        }
+    }
+
+    lines[lineNumber - 1] = newText;
+
+    std::ofstream fileOut("data/" + filename);
+    if (!fileOut) {
+        return "Error writing to file.";
+    }
+
+    for (const auto& l : lines) {
+        fileOut << l << std::endl;
+    }
+
+    fileOut.close();
+    return "Line edited successfully.";
+}
+
 void Session(tcp::socket socket) {
     try {
         asio::streambuf request;
@@ -125,6 +160,12 @@ void Session(tcp::socket socket) {
             std::string username, currentPassword, newPassword;
             request_stream >> username >> currentPassword >> newPassword;
             response = HandleChangePassword(username, currentPassword, newPassword);
+        } else if (command == "edit") {
+            std::string filename, newText;
+            int lineNumber;
+            request_stream >> filename >> lineNumber;
+            std::getline(request_stream, newText);
+            response = HandleEdit(filename, lineNumber, newText);
         } else {
             response = "Unknown command";
         }
