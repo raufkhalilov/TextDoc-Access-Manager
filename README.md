@@ -5,7 +5,7 @@ TextDoc Access Manager is a simple C++ client-server application that I develope
 ## Features
 
 - **Client-Server Architecture**: Separate client and server applications communicate to manage user data and authentication.
-- **Cross-Platform Support**: Compatible with Windows, Linux, and macOS.
+- **Cross-Platform Support**: Compatible with Linux, Windows and macOS.
 - **Multithreaded Server**: Handles multiple client connections concurrently.
 
 ## Requirements
@@ -14,7 +14,7 @@ TextDoc Access Manager is a simple C++ client-server application that I develope
 - **CMake 3.10** or higher
 - **Asio library**
 
-## Installation
+## Installation(for Linux)
 
 ### 1. Install Dependencies
 
@@ -32,6 +32,7 @@ cd vcpkg
 
 ```bash
 ./vcpkg install asio
+sudo apt-get install libasio-dev libboost-all-dev
 ```
 
 ### 2. Clone the Repository
@@ -89,14 +90,6 @@ cd TextDoc-Access-Manager
 - **CMakeLists.txt**: Build configuration file for CMake.
 - **README.md**: Documentation for the project.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
 ## Contributing
 
 Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
-
-## Contact
-
-For issues, questions, or contributions, please open an issue on [GitHub](https://github.com/yourusername/TextDoc-Access-Manager) or contact me through the repository.
