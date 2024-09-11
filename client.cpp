@@ -5,7 +5,7 @@
 #include <asio.hpp> // Используем библиотеку Asio для работы с сетью
 
 using asio::ip::tcp;
-
+bool a = false;
 void ClearScreen() {
 #ifdef _WIN32
     std::system("cls");
@@ -26,11 +26,28 @@ std::string SendRequest(const std::string& request) {
         asio::write(socket, asio::buffer(request + "\n"));
 
         // Читаем ответ от сервера
-        asio::streambuf response;
-        asio::read_until(socket, response, "\n");
-        std::istream response_stream(&response);
         std::string response_data;
-        std::getline(response_stream, response_data);
+        asio::streambuf response;
+        if(a){
+            while (true) {
+                asio::read_until(socket, response, "\n");
+
+                std::istream response_stream(&response);
+                std::string line;
+                std::getline(response_stream, line);
+
+                if (line.empty() && response.size() == 0) {
+                    break;
+                }
+
+                response_data += line + "\n";
+            }
+            a=false;
+        } else {
+            asio::read_until(socket, response, "\n");
+            std::istream response_stream(&response);
+            std::getline(response_stream, response_data);
+        }
 
         return response_data;
     } catch (std::exception& e) {
@@ -143,7 +160,7 @@ int main() {
     while (true) {
         std::cout << "1: Register\n2: Login\n3: Exit\nYour choice: ";
         std::cin >> choice;
-
+        
         switch (choice) {
             case '1':
                 RegisterUser();
@@ -154,12 +171,13 @@ int main() {
                     while (true) {
                         ClearScreen();
                         std::cout << "Successfully logged in!" << std::endl;
-                        std::cout << "1: Display contents\n2: Change username\n3: Change password\n4: Edit file line\n5: Go to the main menu\nYour choice: ";
+                        std::cout << "1: Display contents\n2: Change username\n3: Change password\n4: Edit file contents\n5: Go to the main menu\nYour choice: ";
                         char postLoginChoice;
                         std::cin >> postLoginChoice;
 
                         switch (postLoginChoice) {
                             case '1':
+                                a=true;
                                 DisplayContents(username);
                                 std::cout << "Press Enter to continue..." << std::endl;
                                 std::cin.get();
