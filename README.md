@@ -89,7 +89,3 @@ cd TextDoc-Access-Manager
 - **server.cpp**: Contains the server-side logic for handling client requests.
 - **CMakeLists.txt**: Build configuration file for CMake.
 - **README.md**: Documentation for the project.
-
-## Contributing
-
-Contributions are welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
